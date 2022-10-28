@@ -162,7 +162,7 @@ void Demo::DrawColoredCube()
 	glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 
 	GLint objectColorLoc = glGetUniformLocation(this->shaderProgram, "objectColor");
-	glUniform3f(objectColorLoc, 2.0f, 1.0f, 1.0f);
+	glUniform3f(objectColorLoc, 1.0f, 0.0f, 0.0f);
 
 	glm::mat4 model;
 	glm::mat4 model2;
@@ -171,9 +171,6 @@ void Demo::DrawColoredCube()
 
 	model2 = glm::scale(model2, glm::vec3(0.1, 1.5, 0.1));
 	model2 = glm::translate(model2, glm::vec3(1, 0.5, 1));
-	model3 = glm::translate(model3, glm::vec3(0, 1.5, 0));
-	model3 = glm::rotate(model3, angle, glm::vec3(0, 0, 1));
-	model3 = glm::scale(model3, glm::vec3(1, 0.1, 1));
 
 	GLint modelLoc = glGetUniformLocation(this->shaderProgram, "model");
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -184,9 +181,19 @@ void Demo::DrawColoredCube()
 
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
-	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model3));
+	for (int i = 0; i < 1; i++) {
+		objectColorLoc = glGetUniformLocation(this->shaderProgram, "objectColor");
+		glUniform3f(objectColorLoc, 0.0f, 1.0f, 0.0f);
+		glm::mat4 model3;
 
-	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		model3 = glm::translate(model3, glm::vec3(0, 1.6, 0));
+		model3 = glm::rotate(model3, angle, glm::vec3(0, 0, 1));
+		model3 = glm::scale(model3, glm::vec3(1, 0.1, 1));
+
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model3));
+
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+	}
 
 	glBindVertexArray(0);
 }
