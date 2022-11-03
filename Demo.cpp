@@ -163,37 +163,76 @@ void Demo::DrawColoredCube()
 
 	GLint objectColorLoc = glGetUniformLocation(this->shaderProgram, "objectColor");
 	glUniform3f(objectColorLoc, 1.0f, 0.0f, 0.0f);
-
-	glm::mat4 model;
-	glm::mat4 model2;
-	glm::mat4 model3;
-	model = glm::scale(model, glm::vec3(1, 0.1, 1));
-
-	model2 = glm::scale(model2, glm::vec3(0.1, 1.5, 0.1));
-	model2 = glm::translate(model2, glm::vec3(1, 0.5, 1));
-
 	GLint modelLoc = glGetUniformLocation(this->shaderProgram, "model");
-	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
+	//NAMESIGN
+	//KOTAKBAWaH
+	glm::mat4 model;
+	model = glm::scale(model, glm::vec3(1, 0.1, 1));
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
+	//KOTAKTENGAH
+	glm::mat4 model2;
+	model2 = glm::scale(model2, glm::vec3(0.1, 1.5, 0.1));
+	model2 = glm::translate(model2, glm::vec3(1, 0.5, 1));
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model2));
 
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
+	//KOTAKATAS
+
+	objectColorLoc = glGetUniformLocation(this->shaderProgram, "objectColor");
+	glUniform3f(objectColorLoc, 0.0f, 1.0f, 0.0f);
+	glm::mat4 model3;
+
+	model3 = glm::translate(model3, glm::vec3(0, 1.6, 0));
+	model3 = glm::rotate(model3, angle, glm::vec3(0, 0, 1));
+	model3 = glm::scale(model3, glm::vec3(1, 0.1, 1));
+
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model3));
+
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
+	//GARAGE
 	for (int i = 0; i < 1; i++) {
 		objectColorLoc = glGetUniformLocation(this->shaderProgram, "objectColor");
-		glUniform3f(objectColorLoc, 0.0f, 1.0f, 0.0f);
-		glm::mat4 model3;
+		glUniform3f(objectColorLoc, 1.0f, 1.0f, 1.0f);
 
-		model3 = glm::translate(model3, glm::vec3(0, 1.6, 0));
-		model3 = glm::rotate(model3, angle, glm::vec3(0, 0, 1));
-		model3 = glm::scale(model3, glm::vec3(1, 0.1, 1));
+		glm::mat4 model4;
 
-		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model3));
-
+		model4 = glm::scale(model4, glm::vec3(40, 15, 15));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model4));
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 	}
+	//GarageDoor
+	float x = 2;
+	for (int i = 0; i < 15; i++) {
+		glm::mat4 model5;
+
+		objectColorLoc = glGetUniformLocation(this->shaderProgram, "objectColor");
+		glUniform3f(objectColorLoc, 0.0f, 0.0f, 0.0f);
+		model5 = glm::scale(model, glm::vec3(0.1, 1, 5));
+		model5 = glm::translate(model5, glm::vec3(-150, x, 0));
+		x += 3;
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model5));
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+	}
+	glm::mat4 model6;
+
+	model6 = glm::scale(model6, glm::vec3(0.1, 50, 0.1));
+	model6 = glm::translate(model6, glm::vec3(-190, 0, 28));
+
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model6));
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
+	glm::mat4 model7;
+
+	model7 = glm::scale(model7, glm::vec3(0.1, 50, 0.1));
+	model7 = glm::translate(model7, glm::vec3(-190, 0, -32));
+
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model7));
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
 	glBindVertexArray(0);
 }
