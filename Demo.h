@@ -18,10 +18,20 @@ private:
 	virtual void DeInit();
 	virtual void Update(double deltaTime);
 	virtual void Render();
-	virtual void ProcessInput(GLFWwindow* window);
+	virtual void ProcessInput(GLFWwindow *window);
 	void BuildColoredCube();
 	void BuildColoredPlane();
 	void DrawColoredCube();
 	void DrawColoredPlane();
+
 	float angle = -0.4;
+	float angle2 = -0.8;
+
+	float viewCamX, viewCamY, viewCamZ, upCamX, upCamY, upCamZ, posCamX, posCamY, posCamZ, CAMERA_SPEED, fovy;
+	void MoveCamera(float speed);
+	void StrafeCamera(float speed);
+	void RotateCamera(float speed);
+	void HeightCamera(float speed);
+	void InitCamera();
 };
+
